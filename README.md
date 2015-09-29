@@ -1,4 +1,4 @@
-nitro-template [![wercker status](https://app.wercker.com/status/514973e1d34c9367cf40985a577c9c2a/s "wercker status")](https://app.wercker.com/project/bykey/514973e1d34c9367cf40985a577c9c2a)
+nitro-template [![wercker status](https://app.wercker.com/status/281f306e7157005f0a21b770fbb81086/s "wercker status")](https://app.wercker.com/project/bykey/281f306e7157005f0a21b770fbb81086)
 =============================
 [![npm version](https://badge.fury.io/js/nitro-template.svg)](http://badge.fury.io/js/nitro-template)
 [![Build Status](https://travis-ci.org/nitrojs/nitro-template.svg?branch=master)](https://travis-ci.org/nitrojs/nitro-template)
