@@ -3,13 +3,7 @@ box: emmenko/nodejs-karma
 build:
   # The steps that will be executed on build
   steps:
-
-    - script:
-      name: enabling run makefile
-      code: |
-        sudo apt-get update
-        sudo apt-get install --yes build-essential
-
+    
     # A step that executes `npm install` command
     - npm-install
 
