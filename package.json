@@ -1,0 +1,35 @@
+{
+  "name": "nitro-template",
+  "version": "0.1.2",
+  "description": "powerful javascript template engine",
+  "main": "template.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nitrojs/nitro-template.git"
+  },
+  "keywords": [
+    "javascript",
+    "nitro",
+    "demo"
+  ],
+  "author": "Jesús Manuel Germade Castiñeiras <jesus@germade.es>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nitrojs/nitro-template/issues"
+  },
+  "homepage": "https://github.com/nitrojs/nitro-template",
+  "devDependencies": {
+    "assert": "^1.3.0",
+    "jasmine": "^2.1.1",
+    "jasmine-core": "^2.1.3",
+    "karma": "^0.12.28",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.2",
+    "mocha": "^2.3.3"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "posttest": "grunt uglify:min"
+  }
+}
