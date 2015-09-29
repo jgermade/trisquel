@@ -278,8 +278,8 @@
         return contentRendered === undefined ? '' : contentRendered;
     };
 
-    function compile (template) {
-        var compiled = _compile(template),
+    function template (tmpl) {
+        var compiled = _compile(tmpl),
             renderer = function (scope) {
                 return compiled.render(scope);
             };
@@ -289,32 +289,24 @@
         return renderer;
     }
 
-    compile.cmd = function(cmdName, handler, standalone){
+    template.cmd = function(cmdName, handler, standalone){
         if( isString(cmdName) && isFunction(handler) ) {
             handler.standalone = standalone;
             _cmd[cmdName] = handler;
         }
     };
+    template.helper = template.cmd;
 
-    // template as templates cache
+    var templatesCache = {};
 
-    function template (name, tmpl) {
-      if( tmpl === undefined ) {
-        return name ? template.cache[name] : undefined;
-      }
+    template.get = function (name) {
+      return templatesCache[name];
+    };
 
-      if( isString(name) && isString(tmpl) ) {
-        template.cache[name] = compile(tmpl);
-        template.cache[name].src = tmpl;
-      }
-
-      return template.cache[name];
-    }
-    template.compile = compile;
-    template.cache = {};
-    template.cmd = compile.cmd;
-    template.helper = compile.cmd;
-
+    template.put = function (name, tmpl) {
+      templatesCache[name] = template(tmpl);
+      return template;
+    };
 
     // each as compile.cmd example
 
@@ -368,11 +360,11 @@
     // cmd: include
 
     template.cmd('include', function (scope, expression) {
-      var partial = template( expression.trim() );
+      var partial = template.get( expression.trim() );
       if( partial ) {
         return partial(scope);
       }
-      partial = template( scope.$eval(expression) );
+      partial = template.get( scope.$eval(expression) );
       if( partial ) {
         return partial(scope);
       }
