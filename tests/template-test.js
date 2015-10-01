@@ -32,21 +32,21 @@ beforeEach(function () {
 describe('basic replace', function () {
 
 	it("should replace value", function() {
-		assert.equal(
+		assert.strictEqual(
 			$template( 'value: ${foo}')(data),
 			'value: bar' );
   });
 
 	it("should return if", function() {
-		assert.equal( $template('$if{ foo === "bar" }gogogo{:}whoops{/}')(data), 'gogogo' );
+		assert.strictEqual( $template('$if{ foo === "bar" }gogogo{:}whoops{/}')(data), 'gogogo' );
   });
 
 	it("should return otherwise", function() {
-		assert.equal( $template('$if{ foo !== "bar" }gogogo{:}whoops{/}')(data), 'whoops' );
+		assert.strictEqual( $template('$if{ foo !== "bar" }gogogo{:}whoops{/}')(data), 'whoops' );
   });
 
 	it("should return otherwise (2)", function() {
-		assert.equal( $template('$if{ foo !== "bar" }gogogo{:}{/}')(data), '' );
+		assert.strictEqual( $template('$if{ foo !== "bar" }gogogo{:}{/}')(data), '' );
   });
 
 });
@@ -55,23 +55,23 @@ describe('basic replace', function () {
 describe('partial', function () {
 
 	it("should use sample partial", function() {
-		assert.equal( samplePartial(data), 'value: bar' );
+		assert.strictEqual( samplePartial(data), 'value: bar' );
   });
 
 	it("should include sample partial", function() {
-		assert.equal( $template('$include{sample}')(data), 'value: bar' );
+		assert.strictEqual( $template('$include{sample}')(data), 'value: bar' );
   });
 
 	it("should return if sample", function() {
-		assert.equal( $template('$if{ foo === "bar" }$include{sample}{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$include{sample}{:}whoops{/}')(data), 'value: bar' );
   });
 
 	it("should return if sample as string", function() {
-		assert.equal( $template('$if{ foo === "bar" }$include{\'sample\'}{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$include{\'sample\'}{:}whoops{/}')(data), 'value: bar' );
   });
 
 	it("should return if sample as string", function() {
-		assert.equal( $template('$if{ foo === "bar" }$include{ template }{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$include{ template }{:}whoops{/}')(data), 'value: bar' );
   });
 
 });
@@ -80,31 +80,31 @@ describe('partial', function () {
 describe('each command', function () {
 
 	it("should return list", function() {
-		assert.equal( $template('$each{ item in list },${item}{/}')(data), ',foo,bar,foobar');
+		assert.strictEqual( $template('$each{ item in list },${item}{/}')(data), ',foo,bar,foobar');
   });
 
 	it("should return list with index", function() {
-		assert.equal(  $template('$each{ item in list }[${$index}:${item}]{/}')(data), '[0:foo][1:bar][2:foobar]');
+		assert.strictEqual(  $template('$each{ item in list }[${$index}:${item}]{/}')(data), '[0:foo][1:bar][2:foobar]');
   });
 
 	it("should return list with index", function() {
-		assert.equal(  $template('$each{ item,key in list }[${key}:${item}]{/}')(data), '[0:foo][1:bar][2:foobar]');
+		assert.strictEqual(  $template('$each{ item,key in list }[${key}:${item}]{/}')(data), '[0:foo][1:bar][2:foobar]');
   });
 
 	it("should return list with inheritance", function() {
-		assert.equal(  $template('$each{ item in list }[${foo}:${item}]{/}')(data), '[bar:foo][bar:bar][bar:foobar]');
+		assert.strictEqual(  $template('$each{ item in list }[${foo}:${item}]{/}')(data), '[bar:foo][bar:bar][bar:foobar]');
   });
 
 	it("should return map", function() {
-		assert.equal(  $template('$each{ item in map }[${$key}:${item}]{/}')(data), '[hi:all][bye:nobody]');
+		assert.strictEqual(  $template('$each{ item in map }[${$key}:${item}]{/}')(data), '[hi:all][bye:nobody]');
   });
 
 	it("should return map with key", function() {
-		assert.equal(  $template('$each{ item, key in map }[${key}:${item}]{/}')(data), '[hi:all][bye:nobody]');
+		assert.strictEqual(  $template('$each{ item, key in map }[${key}:${item}]{/}')(data), '[hi:all][bye:nobody]');
   });
 
 	it("should return map with key and inheritance", function() {
-		assert.equal(  $template('$each{ item, key in map }[${foo}:${key}:${item}]{/}')(data), '[bar:hi:all][bar:bye:nobody]');
+		assert.strictEqual(  $template('$each{ item, key in map }[${foo}:${key}:${item}]{/}')(data), '[bar:hi:all][bar:bye:nobody]');
   });
 
 });
@@ -117,15 +117,15 @@ describe('custom commands', function () {
 			return Number(scope.$eval(expression))*2;
 		});
 
-		assert.equal(  $template('$double{4}')(data), '8');
+		assert.strictEqual(  $template('$double{4}')(data), '8');
   });
 
 	it("should use custom i18n command (helper)", function() {
-		assert.equal(  $template('$i18n{label.cancel}')(data), 'Cancel');
+		assert.strictEqual(  $template('$i18n{label.cancel}')(data), 'Cancel');
   });
 
 	it("should use custom i18n command (helper) inside a condition", function() {
-		assert.equal(  $template('$if{ foo === "bar" }$i18n{cancel}{:}$i18n{accept}{/}, done!')(data), 'Cancel, done!');
+		assert.strictEqual(  $template('$if{ foo === "bar" }$i18n{cancel}{:}$i18n{accept}{/}, done!')(data), 'Cancel, done!');
   });
 
 });
