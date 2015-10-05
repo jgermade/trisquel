@@ -357,6 +357,17 @@
           throw expression + ' malformed each expression';
         });
 
+    // cmd: with
+
+    template.cmd('with', function (scope, expression) {
+      var parts = expression.split('as'),
+          o = {};
+
+      o[parts[1].trim()] = scope.$eval( parts[0] );
+
+      return this.content( scope.$new(o) );
+    });
+
     // cmd: include
 
     template.cmd('include', function (scope, expression) {
