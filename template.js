@@ -376,12 +376,18 @@
         return partial(scope);
       }
       partial = template.get( scope.$eval(expression) );
+      
       if( partial ) {
         return partial(scope);
       }
 
       throw 'partial' + expression + 'not found';
-    });
+    }, true);
+
+    template.cmd('block', function (scope, expression) {
+      var block = scope.$eval(expression);
+      return ( typeof block === 'string' ? template(block) : block )(scope);
+    }, true);
 
     // --------------------------
 

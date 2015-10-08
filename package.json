@@ -1,6 +1,6 @@
 {
   "name": "nitro-template",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "powerful javascript template engine",
   "main": "template.js",
   "repository": {
