@@ -126,8 +126,8 @@
 
     // ----------------------------
 
-    var splitRex = /\$[\w\?]*{[^\}]+}|{[\$\/]}|{\:}/,
-        matchRex = /(\$([\w\?]*){([^\}]+)})|({[\$\/]})|({\:})/g;
+    var splitRex = /\$[\w\?]*{[^\}]*}|{[\$\/]}|{\:}/,
+        matchRex = /(\$([\w\?]*){([^\}]*)})|({[\$\/]})|({\:})/g;
 
     function _compile(tmpl){
 
@@ -208,24 +208,21 @@
     }
 
     function _evalContent(scope, content) {
-        var result = '';
 
         if( isFunction(content) ) {
           return content(scope);
         } else if( isArray(content) ) {
 
-          // console.warn('_evalContent', scope, content);
-          content.forEach(function(token){
-              if( isString(token) ) {
-              	result += token;
-              } else if( token instanceof ModelScript ) {
-              	result += token.render(scope);
-              } else if( isArray(token) ) {
-              	result += _evalContent(scope, content);
-              }
-          });
+          return content.reduce(function (prev, token) {
+            if( isString(token) ) {
+            	return prev + token;
+            } else if( token instanceof ModelScript ) {
+            	return prev + token.render(scope);
+            } else if( isArray(token) ) {
+            	return prev + _evalContent(scope, token);
+            }
+          }, '');
 
-          return result;
         } else {
           return content;
         }
@@ -263,7 +260,7 @@
     }
 
     ModelScript.prototype.render = function (data) {
-
+        
         if( !isFunction(_cmd[this.cmd]) ) {
           return '[command ' + this.cmd+' not found]';
         }
@@ -376,7 +373,7 @@
         return partial(scope);
       }
       partial = template.get( scope.$eval(expression) );
-      
+
       if( partial ) {
         return partial(scope);
       }
