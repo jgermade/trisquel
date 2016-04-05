@@ -9,9 +9,14 @@ var assert = require('assert'), data,
 		};
 
 $template.cmd('i18n', function (scope, expression) {
-		var splitted = expression.split(':'),
-				locale = i18n[splitted[0].trim()],
-				scopeExp = splitted[1];
+		var splitted = expression.match(/([^:]*):(.*)/), locale, scopeExp;
+
+		if( splitted ) {
+			locale = i18n[splitted[1].trim()];
+			scopeExp = splitted[2];
+		} else {
+			locale = i18n[expression.trim()];
+		}
 
 		if( typeof locale !== 'string' ) {
 			return '{! ' + splitted[0].trim() + ' }';
@@ -148,7 +153,7 @@ describe('filters', function () {
   });
 
 	it("should use custom i18n command with scope", function() {
-		assert.strictEqual(  $template('$i18n{cancel}')(data), 'Cancel');
+		assert.strictEqual(  $template('$i18n{months:{ n: 5 }}')(), '5 meses');
   });
 
 });
