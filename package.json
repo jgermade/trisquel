@@ -23,5 +23,8 @@
   },
   "scripts": {
     "test": "$(npm bin)/mocha tests"
+  },
+  "dependencies": {
+    "nitro-tools": "^0.1.11"
   }
 }

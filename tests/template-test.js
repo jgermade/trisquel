@@ -1,14 +1,14 @@
 
 var assert = require('assert'), data,
-		$template = require('../template'),
-		samplePartial = $template.put('sample', 'value: ${foo}').get('sample'),
+		$template = require('../lib/template'),
+		samplePartial = $template.put('sample', 'value: ${foo}'),
 		i18n = {
 			cancel: 'Cancel',
 			accept: 'Accept'
 		};
 
 $template.cmd('i18n', function (scope, expression) {
-		return i18n[expression.trim()] || i18n[scope.$eval(expression)] || expression.trim();
+		return i18n[expression.trim()] || i18n[scope.eval(expression)] || expression.trim();
 	}, true);
 
 beforeEach(function () {
@@ -59,11 +59,7 @@ describe('partial', function () {
   });
 
 	it("should include sample partial", function() {
-		assert.strictEqual( $template('$include{sample}')(data), 'value: bar' );
-  });
-
-	it("should return if sample", function() {
-		assert.strictEqual( $template('$if{ foo === "bar" }$include{sample}{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$include{\'sample\'}')(data), 'value: bar' );
   });
 
 	it("should return if sample as string", function() {
@@ -114,8 +110,8 @@ describe('custom commands', function () {
 
 	it("should add new command", function() {
 		$template.cmd('double', function (scope, expression) {
-			return Number(scope.$eval(expression))*2;
-		});
+			return Number(scope.eval(expression))*2;
+		}, true);
 
 		assert.strictEqual(  $template('$double{4}')(data), '8');
   });

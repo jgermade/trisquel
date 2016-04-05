@@ -28,9 +28,9 @@ var data = {
   }
 };
 
-$template.compile('$if{ foo === "bar" }gogogo{:}whoops{/}')(data)
-// returns 'gogogo'
+template.put('demo-partial', '$each{ item,key in map }[${foo}:${key}:${item}]{/}', data)
 
-$template.compile('$each{ item, key in map }[${foo}:${key}:${item}]{/}')(data);
-// returns '[bar:hi:all][bar:bye:nobody]'
+template('$if{ foo !== \'bar\' }wrong{:}gogogo: $include{\'demo-partial\'} {/}', data);
+
+// returns 'gogogo: [bar:hi:all][bar:bye:nobody]'
 ```
