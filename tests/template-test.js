@@ -148,7 +148,7 @@ describe('filters', function () {
   });
 
 	it("should use custom i18n command with scope", function() {
-		assert.strictEqual(  $template('$i18n{cancel}')(data), 'Cancel');
+		assert.strictEqual(  $template('$i18n{months:{ n: 5 }}')(), 'Cancel');
   });
 
 });
