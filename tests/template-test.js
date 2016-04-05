@@ -4,12 +4,28 @@ var assert = require('assert'), data,
 		samplePartial = $template.put('sample', 'value: ${foo}'),
 		i18n = {
 			cancel: 'Cancel',
-			accept: 'Accept'
+			accept: 'Accept',
+			months: '${n} meses'
 		};
 
 $template.cmd('i18n', function (scope, expression) {
-		return i18n[expression.trim()] || i18n[scope.eval(expression)] || expression.trim();
+		var splitted = expression.split(':'),
+				locale = i18n[splitted[0].trim()],
+				scopeExp = splitted[1];
+
+		if( typeof locale !== 'string' ) {
+			return '{! ' + splitted[0].trim() + ' }';
+		}
+
+		if( scopeExp ) {
+			return $template(locale)(scope.eval(scopeExp));
+		}
+		return locale;
 	}, true);
+
+$template.filter('i18n', function (key) {
+	return i18n[key];
+});
 
 beforeEach(function () {
 	data = {
@@ -105,7 +121,6 @@ describe('each command', function () {
 
 });
 
-
 describe('custom commands', function () {
 
 	it("should add new command", function() {
@@ -117,11 +132,23 @@ describe('custom commands', function () {
   });
 
 	it("should use custom i18n command (helper)", function() {
-		assert.strictEqual(  $template('$i18n{label.cancel}')(data), 'Cancel');
+		assert.strictEqual(  $template('$i18n{cancel}')(data), 'Cancel');
   });
 
 	it("should use custom i18n command (helper) inside a condition", function() {
 		assert.strictEqual(  $template('$if{ foo === "bar" }$i18n{cancel}{:}$i18n{accept}{/}, done!')(data), 'Cancel, done!');
+  });
+
+});
+
+describe('filters', function () {
+
+	it("filter i18n", function() {
+		assert.strictEqual(  $template('${ \'cancel\' | i18n }')({}), 'Cancel');
+  });
+
+	it("should use custom i18n command with scope", function() {
+		assert.strictEqual(  $template('$i18n{cancel}')(data), 'Cancel');
   });
 
 });
