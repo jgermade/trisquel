@@ -5,7 +5,7 @@ var assert = require('assert'), data,
 		i18n = {
 			cancel: 'Cancel',
 			accept: 'Accept',
-			months: '${n} meses'
+			months: '${n} mes$if{n > 1}es{:}{/}'
 		};
 
 $template.cmd('i18n', function (scope, expression) {
@@ -154,6 +154,7 @@ describe('filters', function () {
 
 	it("should use custom i18n command with scope", function() {
 		assert.strictEqual(  $template('$i18n{months:{ n: 5 }}')(), '5 meses');
+		assert.strictEqual(  $template('$i18n{months:{ n: 1 }}')(), '1 mes');
   });
 
 });
