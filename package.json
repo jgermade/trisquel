@@ -1,8 +1,8 @@
 {
   "name": "nitro-template",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "powerful javascript template engine",
-  "main": "template.js",
+  "main": "lib/template.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:nitrojs/nitro-template.git"
