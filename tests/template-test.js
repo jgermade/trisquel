@@ -73,22 +73,26 @@ describe('basic replace', function () {
 });
 
 
-describe('partial', function () {
+describe('include', function () {
 
 	it("should use sample partial", function() {
 		assert.strictEqual( samplePartial(data), 'value: bar' );
   });
 
 	it("should include sample partial", function() {
-		assert.strictEqual( $template('$include{\'sample\'}')(data), 'value: bar' );
+		assert.strictEqual( $template('$include{ sample }')(data), 'value: bar' );
+  });
+
+});
+
+describe('includeEval', function () {
+
+	it("should return if sample as string", function() {
+		assert.strictEqual( $template('$if{ foo === "bar" }$includeEval{\'sample\'}{:}whoops{/}')(data), 'value: bar' );
   });
 
 	it("should return if sample as string", function() {
-		assert.strictEqual( $template('$if{ foo === "bar" }$include{\'sample\'}{:}whoops{/}')(data), 'value: bar' );
-  });
-
-	it("should return if sample as string", function() {
-		assert.strictEqual( $template('$if{ foo === "bar" }$include{ template }{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$includeEval{ template }{:}whoops{/}')(data), 'value: bar' );
   });
 
 });
