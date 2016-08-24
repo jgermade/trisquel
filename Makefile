@@ -1,6 +1,9 @@
 # --- nitro-js
 
-test:
+install:
+	npm install || true
+
+test: install
 	@$(shell npm bin)/mocha tests
 
 echo:

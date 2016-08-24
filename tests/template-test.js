@@ -1,7 +1,7 @@
 
 var assert = require('assert'), data,
 		$template = require('../lib/template'),
-		samplePartial = $template.put('sample', 'value: ${foo}'),
+		samplePartial = $template.put('sample', 'value: ${ foo }'),
 		i18n = {
 			cancel: 'Cancel',
 			accept: 'Accept',
@@ -157,8 +157,17 @@ describe('filters', function () {
   });
 
 	it("should use custom i18n command with scope", function() {
-		assert.strictEqual(  $template('$i18n{months:{ n: 5 }}')(), '5 meses');
-		assert.strictEqual(  $template('$i18n{months:{ n: 1 }}')(), '1 mes');
+		assert.strictEqual(  $template('$i18n{ months:{ n: 5, i: { foo: \'bar\' } } }')(), '5 meses');
+		assert.strictEqual(  $template('$i18n{ months:{ n: 1 } }')(), '1 mes');
+  });
+
+  it("should use custom i18n command with scope should fail", function() {
+		assert.strictEqual(  $template('$i18n{ months:{ n: 5, i: { foo: \'bar\' } } }')(), '5 meses');
+		assert.strictEqual(  $template('$i18n{ months:{ n: 1 } }')(), '1 mes');
+
+		assert.throws(function () {
+			$template('$i18n{ months:{ n: 1 } ')()
+		}, /expression curly brackets mismatch/, 'did not throw with expected message');
   });
 
 });
