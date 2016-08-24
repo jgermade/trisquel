@@ -5,7 +5,9 @@ var assert = require('assert'), data,
 		i18n = {
 			cancel: 'Cancel',
 			accept: 'Accept',
-			months: '${n} mes$if{n > 1}es{:}{/}'
+			months: '${n} mes$if{n > 1}es{:}{/}',
+			ok: 'gogogo',
+			ko: 'whoops'
 		};
 
 $template.cmd('i18n', function (scope, expression) {
@@ -60,19 +62,19 @@ describe('basic replace', function () {
   });
 
 	it("should return if", function() {
-		assert.strictEqual( $template('$if{ foo === "bar" }gogogo{:}whoops{/}')(data), 'gogogo' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$i18n{ok}{:}$i18n{ok}{/}')(data), i18n.ok );
   });
 
   it("should return if (2)", function() {
-		assert.strictEqual( $template('$if{ !fails }gogogo{/}')(data), 'gogogo' );
+		assert.strictEqual( $template('$if{ !fails }$i18n{ok}{/}')(data), i18n.ok );
   });
 
 	it("should return otherwise", function() {
-		assert.strictEqual( $template('$if{ foo !== "bar" }gogogo{:}whoops{/}')(data), 'whoops' );
+		assert.strictEqual( $template('$if{ foo !== "bar" }$i18n{ok}{:}$i18n{ko}{/}')(data), i18n.ko );
   });
 
 	it("should return otherwise (2)", function() {
-		assert.strictEqual( $template('$if{ foo !== "bar" }gogogo{:}{/}')(data), '' );
+		assert.strictEqual( $template('$if{ foo !== "bar" }$i18n{ok}{:}{/}')(data), '' );
   });
 
 });
@@ -93,11 +95,11 @@ describe('include', function () {
 describe('includeEval', function () {
 
 	it("should return if sample as string", function() {
-		assert.strictEqual( $template('$if{ foo === "bar" }$includeEval{\'sample\'}{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$includeEval{\'sample\'}{:}$i18n{ko}{/}')(data), 'value: bar' );
   });
 
 	it("should return if sample as string", function() {
-		assert.strictEqual( $template('$if{ foo === "bar" }$includeEval{ template }{:}whoops{/}')(data), 'value: bar' );
+		assert.strictEqual( $template('$if{ foo === "bar" }$includeEval{ template }{:}$i18n{ko}{/}')(data), 'value: bar' );
   });
 
 });
@@ -118,11 +120,11 @@ describe('each command', function () {
   });
 
 	it("should return list with inheritance", function() {
-		assert.strictEqual(  $template('$each{ item in list }[${foo}:${item}]{/}')(data), '[bar:foo][bar:bar][bar:foobar]');
+		assert.strictEqual(  $template('$each{ item in list }[${ foo }:${ item }]{/}')(data), '[bar:foo][bar:bar][bar:foobar]');
   });
 
 	it("should return map", function() {
-		assert.strictEqual(  $template('$each{ item in map }[${$key}:${item}]{/}')(data), '[hi:all][bye:nobody]');
+		assert.strictEqual(  $template('$each{ item in map }[${ $key }:${ item }]{/}')(data), '[hi:all][bye:nobody]');
   });
 
 	it("should return map with key", function() {
