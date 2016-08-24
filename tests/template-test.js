@@ -34,6 +34,7 @@ $template.filter('i18n', function (key) {
 
 beforeEach(function () {
 	data = {
+		fails: false,
 		foo: 'bar',
 		crash: {
 			test: 'dummy'
@@ -60,6 +61,10 @@ describe('basic replace', function () {
 
 	it("should return if", function() {
 		assert.strictEqual( $template('$if{ foo === "bar" }gogogo{:}whoops{/}')(data), 'gogogo' );
+  });
+
+  it("should return if (2)", function() {
+		assert.strictEqual( $template('$if{ !fails }gogogo{/}')(data), 'gogogo' );
   });
 
 	it("should return otherwise", function() {
