@@ -34,6 +34,10 @@ $template.filter('i18n', function (key) {
 	return i18n[key];
 });
 
+$template.filter('deutsche', function (wenn) {
+	return wenn ? 'wenn' : 'keine';
+});
+
 beforeEach(function () {
 	data = {
 		fails: false,
@@ -163,7 +167,7 @@ describe('filters', function () {
 		assert.strictEqual(  $template('${ \'cancel\' | i18n }')({}), 'Cancel');
   });
 
-	it("should use custom i18n command with scope", function() {
+  it("should use custom i18n command with scope", function() {
 		assert.strictEqual(  $template('$i18n{ months:{ n: 5, i: { foo: \'bar\' } } }')(), '5 meses');
 		assert.strictEqual(  $template('$i18n{ months:{ n: 1 } }')(), '1 mes');
   });
@@ -175,6 +179,22 @@ describe('filters', function () {
 		assert.throws(function () {
 			$template('$i18n{ months:{ n: 1 } ')()
 		}, /expression curly brackets mismatch/, 'did not throw with expected message');
+  });
+
+});
+
+describe('filters in conditional expression', function () {
+
+  it("if [or]", function() {
+		assert.strictEqual( $template('$if{ true || false }gogogo{/}')(), 'gogogo');
+  });
+
+  it("if [or] filter (wenn)", function() {
+		assert.strictEqual( $template('${ true || false | deutsche }')(), 'wenn');
+  });
+
+  it("if [or] filter (keine)", function() {
+		assert.strictEqual( $template('${ false || false | deutsche }')(), 'keine');
   });
 
 });
