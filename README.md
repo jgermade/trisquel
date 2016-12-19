@@ -1,16 +1,18 @@
-nitro-template [![wercker status](https://app.wercker.com/status/281f306e7157005f0a21b770fbb81086/s "wercker status")](https://app.wercker.com/project/bykey/281f306e7157005f0a21b770fbb81086)
-=============================
-[![npm version](https://badge.fury.io/js/nitro-template.svg)](http://badge.fury.io/js/nitro-template)
-[![Build Status](https://travis-ci.org/nitrojs/nitro-template.svg?branch=master)](https://travis-ci.org/nitrojs/nitro-template)
+# trisquel
 
-Installation
-------------
+JS template engine
+
+[![](https://img.shields.io/npm/v/parole.svg)](https://www.npmjs.com/package/trisquel)
+[![Build Status](https://travis-ci.org/kiltjs/trisquel.svg?branch=master)](https://travis-ci.org/kiltjs/trisquel)
+
+### Installation
+
 ```.sh
-npm install nitro-template --save
+npm install trisquel --save
 ```
 
-Usage
------
+### Usage
+
 ```.js
 var data = {
   foo: 'bar',
@@ -49,4 +51,13 @@ console.log( template('${ \'months\' | i18n:{ n: 5 } }')() );
 // returns '5 meses'
 console.log( template('${ \'months\' | i18n:{ n: 1 } }')() );
 // returns '1 mes'
+```
+
+### Tests
+[![travis](https://cdn.travis-ci.org/images/favicon-662edf026745110e8203d8cf38d1d325.png)](https://travis-ci.org/kiltjs/trisquel)
+[![Build Status](https://travis-ci.org/kiltjs/trisquel.svg?branch=master)](https://travis-ci.org/kiltjs/trisquel)
+[![Wercker](http://wercker.com/favicon.ico)](https://app.wercker.com/project/bykey/281f306e7157005f0a21b770fbb81086)
+[![wercker status](https://app.wercker.com/status/281f306e7157005f0a21b770fbb81086/s "wercker status")](https://app.wercker.com/project/bykey/281f306e7157005f0a21b770fbb81086)
+``` sh
+make test
 ```

@@ -1,4 +1,4 @@
-# --- nitro-js
+# --- trisquel
 
 install:
 	npm install || true

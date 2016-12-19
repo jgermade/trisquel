@@ -1,25 +1,30 @@
 {
-  "name": "nitro-template",
-  "version": "0.2.13",
-  "description": "powerful javascript template engine",
+  "name": "trisquel",
+  "version": "0.4.0",
+  "description": "JS template engine",
   "main": "lib/template.js",
   "repository": {
     "type": "git",
-    "url": "git@github.com:nitrojs/nitro-template.git"
+    "url": "git@github.com:kiltjs/trisquel.git"
   },
   "keywords": [
     "javascript",
-    "nitro",
+    "trisquel",
+    "template",
+    "templates",
     "demo"
   ],
   "author": "Jesús Manuel Germade Castiñeiras <jesus@germade.es>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nitrojs/nitro-template/issues"
+    "url": "https://github.com/kiltjs/trisquel/issues"
   },
-  "homepage": "https://github.com/nitrojs/nitro-template",
+  "homepage": "https://github.com/kiltjs/trisquel",
   "devDependencies": {
-    "mocha": "^2.3.3"
+    "mocha": "^3.2.0"
+  },
+  "directories": {
+    "lib": "./lib"
   },
   "scripts": {
     "test": "$(npm bin)/mocha tests"
