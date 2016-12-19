@@ -2,7 +2,7 @@
 
 JS template engine
 
-[![](https://img.shields.io/npm/v/parole.svg)](https://www.npmjs.com/package/trisquel)
+[![](https://img.shields.io/npm/v/trisquel.svg)](https://www.npmjs.com/package/trisquel)
 [![Build Status](https://travis-ci.org/kiltjs/trisquel.svg?branch=master)](https://travis-ci.org/kiltjs/trisquel)
 
 ### Installation
