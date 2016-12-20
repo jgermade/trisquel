@@ -1,0 +1,24 @@
+{
+  "name": "trisquel",
+  "description": "JS template engine",
+  "main": "dist/trisquel.min.js",
+  "authors": [
+    "Jesús Manuel Germade Castiñeiras <jesus@germade.es>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "javascript",
+    "trisquel",
+    "template",
+    "templates",
+    "demo"
+  ],
+  "homepage": "https://github.com/kiltjs/trisquel",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
