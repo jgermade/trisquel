@@ -1,8 +1,8 @@
 {
   "name": "trisquel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JS template engine",
-  "main": "lib/template.js",
+  "main": "dist/triquel.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:kiltjs/trisquel.git"
@@ -21,13 +21,16 @@
   },
   "homepage": "https://github.com/kiltjs/trisquel",
   "devDependencies": {
-    "mocha": "^3.2.0"
-  },
-  "directories": {
-    "lib": "./lib"
+    "mocha": "^3.2.0",
+    "rollup": "^0.37.0",
+    "uglify-js": "^2.7.5"
   },
   "scripts": {
-    "test": "$(npm bin)/mocha tests"
+    "pretest": "npm install && npm run build",
+    "test": "mocha tests",
+    "build": "rollup -f umd -n trisquel src/template.js --output dist/trisquel.js",
+    "postbuild": "uglifyjs dist/trisquel.js -o dist/trisquel.min.js -c -m",
+    "prepublish": "npm run build"
   },
   "dependencies": {}
 }

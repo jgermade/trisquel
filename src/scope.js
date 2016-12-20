@@ -1,6 +1,8 @@
 'use strict';
 
-var evalExpression = require('./eval');
+import evalExpression from './eval'
+
+// var evalExpression = require('./eval');
 
 var Scope = function (data) {
 		if(!this) {
@@ -31,4 +33,6 @@ Scope.prototype.eval = function ( expression ) {
     return evalExpression(expression)(this);
 };
 
-module.exports = Scope;
+// module.exports = Scope;
+
+export default Scope

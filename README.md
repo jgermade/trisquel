@@ -59,5 +59,5 @@ console.log( template('${ \'months\' | i18n:{ n: 1 } }')() );
 [![Wercker](http://wercker.com/favicon.ico)](https://app.wercker.com/project/bykey/281f306e7157005f0a21b770fbb81086)
 [![wercker status](https://app.wercker.com/status/281f306e7157005f0a21b770fbb81086/s "wercker status")](https://app.wercker.com/project/bykey/281f306e7157005f0a21b770fbb81086)
 ``` sh
-make test
+npm test
 ```

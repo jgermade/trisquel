@@ -1,8 +1,9 @@
 
-var Scope = require('./scope'),
-    filters = require('./filters'),
-    parse = require('./parse'),
-    cmds = require('./cmds');
+import Scope from './scope'
+import filters from './filters'
+import parse from './parse'
+import cmds from './cmds'
+import evalExpression from './eval'
 
 function compile (tmpl) {
   var render = parse(tmpl);
@@ -15,10 +16,9 @@ function compile (tmpl) {
 function template (tmpl, scope) {
   return scope ? compile(tmpl)(scope) : compile(tmpl);
 }
-template.filter = require('./filters');
-// template.filters = require('./filters');
+template.filter = filters;
 
-template.eval = require('./eval');
+template.eval = evalExpression;
 template.scope = function (data) {
   return new Scope(data);
 };
@@ -63,4 +63,4 @@ template.cmd('includeEval', function (scope, expression) {
   return tmpl(scope);
 }, true);
 
-module.exports = template;
+export default template

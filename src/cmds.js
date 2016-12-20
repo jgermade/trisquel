@@ -7,7 +7,7 @@ function evalExpression (scope, expression) {
 
 evalExpression.$noContent = true;
 
-module.exports = {
+export default {
   '': function (scope, expression) {
     return scope.eval(expression);
   },

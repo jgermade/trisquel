@@ -1,6 +1,6 @@
 
 var assert = require('assert'), data,
-		$template = require('../lib/template'),
+		$template = require('../dist/trisquel'),
 		samplePartial = $template.put('sample', 'value: ${ foo }'),
 		i18n = {
 			cancel: 'Cancel',

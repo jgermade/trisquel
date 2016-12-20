@@ -1,5 +1,5 @@
 
-var filters = require('./filters');
+import filters from './filters'
 
 function parseExpression (expression) {
   var parts = expression.split('|'),
@@ -41,4 +41,4 @@ function evalExpression (expression) {
   };
 }
 
-module.exports = evalExpression;
+export default evalExpression;

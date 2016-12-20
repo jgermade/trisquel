@@ -1,7 +1,9 @@
 
+import cmds from './cmds'
+
 var REsplit = /\$\w*{[^}]*}|{\/}|{\:}|{else}/,
-    REmatch = /\$(\w*){([^}]*)}|{(\/|\:|else)}/g,
-    cmds = require('./cmds');
+    REmatch = /\$(\w*){([^}]*)}|{(\/|\:|else)}/g;
+    // cmds = require('./cmds');
 
 function singleCmd (cmd, expression) {
   return function (scope) {
@@ -123,4 +125,6 @@ function parse(tmpl){
   return raiseList(list, 'root');
 }
 
-module.exports = parse;
+export default parse
+
+// module.exports = parse;

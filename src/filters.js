@@ -42,4 +42,5 @@ filters.map = function (parts) {
   });
 };
 
-module.exports = filters;
+// module.exports = filters;
+export default filters;
