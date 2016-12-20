@@ -1,8 +1,8 @@
 {
   "name": "trisquel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JS template engine",
-  "main": "dist/triquel.js",
+  "main": "dist/trisquel.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:kiltjs/trisquel.git"

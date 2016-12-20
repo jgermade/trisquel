@@ -1,7 +1,7 @@
 {
   "name": "trisquel",
   "description": "JS template engine",
-  "main": "dist/trisquel.min.js",
+  "main": "dist/trisquel.js",
   "authors": [
     "Jesús Manuel Germade Castiñeiras <jesus@germade.es>"
   ],
